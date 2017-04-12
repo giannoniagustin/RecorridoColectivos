@@ -4,18 +4,20 @@ import java.util.Date;
 
 import com.google.maps.model.LatLng;
 
+import google.ApiGoogle;
+
 public class Punto {
 
 
-    private Date fechaCreacion;
-    private String calle;
-    private Integer altura;
-    private Integer alturaInicio;
-    private Integer alturaFin;
-    private LatLng coordenada;
+	protected Date fechaCreacion;
+    protected String calle;
+    protected Integer altura;
+    protected Integer alturaInicio;
+    protected Integer alturaFin;
+    protected LatLng coordenada;
     
     
-	public Punto(Date fechaCreacion, String calle, int altura, int alturaIn, int alturaFin, Double latitude, Double longitude) {
+	public Punto(Date fechaCreacion, String calle, Integer altura, Integer alturaIn, Integer alturaFin, Double latitude, Double longitude) {
 		super();
 		this.fechaCreacion = fechaCreacion;
 		this.calle = calle;
@@ -23,6 +25,34 @@ public class Punto {
 		this.alturaInicio=alturaIn;
 		this.alturaFin=alturaFin;
 		this.coordenada=new LatLng(latitude, longitude);
+	}
+	public Integer getAlturaInicio() {
+		return alturaInicio;
+	}
+	public void setAlturaInicio(Integer alturaInicio) {
+		this.alturaInicio = alturaInicio;
+	}
+	public Integer getAlturaFin() {
+		return alturaFin;
+	}
+	public void setAlturaFin(Integer alturaFin) {
+		this.alturaFin = alturaFin;
+	}
+	public void setAltura(Integer altura) {
+		this.altura = altura;
+	}
+	public Punto(Date fechaCreacion,Double latitude, Double longitude)
+	{
+		ApiGoogle apiGoogle= new ApiGoogle();
+		this.fechaCreacion=fechaCreacion;
+		this.coordenada=new LatLng(latitude, longitude);
+		Punto p= apiGoogle.direccion(this.coordenada);
+		this.calle= p.getCalle();
+		this.altura=p.getAltura();
+		this.alturaInicio=p.getAlturaInicio();
+		this.alturaFin=p.getAlturaFin();
+	
+		
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;

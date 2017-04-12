@@ -12,11 +12,12 @@ public class Colectivo extends Punto{
 	private String sentido;
 	private Double velocidad;
 	private Date tiempo;
+	private Integer nroColectivo;
 	
 	public Colectivo( Double latitude,
-			Double longitude, String idCole,String descripcion,String nombreIcono,Double velocidad,Date tiempo,String sentido) 
+			Double longitude, String idCole,String descripcion,String nombreIcono,Double velocidad,Date tiempo,String sentido,Integer nroColectivo) 
 	{
-		super(null, null, -1, -1, -1, latitude, longitude);
+		super(new Date(), latitude, longitude);
 		
 		this.idCole=idCole;
 		this.Descripcion=descripcion;
@@ -24,7 +25,15 @@ public class Colectivo extends Punto{
 		this.sentido=sentido;
 		this.tiempo=tiempo;
 		this.velocidad=velocidad;
+		this.nroColectivo=nroColectivo;
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Colectivo [sentido=" + sentido + ", velocidad=" + velocidad + ", tiempo=" + tiempo + ", nroColectivo="
+				+ nroColectivo + ", calle=" + calle + ", altura=" + altura + ", alturaInicio=" + alturaInicio
+				+ ", alturaFin=" + alturaFin + ", coordenada=" + coordenada + "]";
 	}
 	  
 

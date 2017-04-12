@@ -18,6 +18,7 @@ import google.ApiGoogle;
 import grafo.Grafo;
 import grafo.Punto;
 import grafo.Trayecto;
+import parser.Parser;
 import recorrido.ManangerRecorrido;
 
 
@@ -42,10 +43,15 @@ public class recorridoGoogle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-	   ManangerRecorrido mRec= new ManangerRecorrido();
+	 
 	   ManangerArchivos manangerArchivos= new ManangerArchivos();
+	   ManangerRecorrido mRec= new ManangerRecorrido(new ApiGoogle(),manangerArchivos,new Parser() );
+	   
+	   Archivo archivo= new Archivo(ManangerRecorrido.RECORRIDO_505_A, "new1", manangerArchivos);
+	   archivo.abrirArchivoLectura();
+	   mRec.procesarColectivos(archivo.proximaLinea(), "505");
 
-	   mRec.cargarRecorridos();
+	//   mRec.cargarRecorridos();
 	      
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

@@ -71,7 +71,7 @@ public class Grafo {
 	
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			    e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class Grafo {
 		
 	}
 
-	public ArrayList<Vertice> getVertices() {
+	 public ArrayList<Vertice> getVertices() {
 		return vertices;
 	}
 

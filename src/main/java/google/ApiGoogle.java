@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,12 +39,12 @@ import com.google.maps.model.TravelMode;
 import grafo.Punto;
 import grafo.Trayecto;
 
+
 public class ApiGoogle {
 	
 	private static String clave_api="AIzaSyDkVC2m6GYsNlduZ3QPxs-Wk50Nm4FSlDI";
 	private static String idioma="es-ES";
 	private static String region="AR";
-	private static String indefinida="-1";
 	GeoApiContext context;
 
 	public ApiGoogle() {
@@ -81,33 +82,46 @@ public class ApiGoogle {
 	 {
 		
 		 AddressComponent[] componenteDireccion;
-		 String[] altura;
-		 String alturaInicio,alturaFin,calle;
+		 Integer alturaInicio,alturaFin,altura;
+		 String calle;
+		 alturaInicio=null;
+		 alturaFin=null;
+		 altura=null;
 		 
 		 try 
 		 {
+			Gson gson =new Gson(); 
 			GeocodingResult[] results;
 			results = GeocodingApi.reverseGeocode(context, coordenada).language(idioma).await();
-	        
+	 //      String a = gson.toJson(results);
+	       
 			componenteDireccion= 	results[0].addressComponents;
 			if (componenteDireccion[0].longName.contains("-"))
 			{
-			altura= componenteDireccion[0].longName.split("-");
-			alturaInicio=altura[0];
-			alturaFin=altura[1];
+			altura= Integer.parseInt(componenteDireccion[0].longName.split("-")[0]);
+			alturaInicio=altura;
+			alturaFin=Integer.parseInt(componenteDireccion[0].longName.split("-")[1]);
 			calle =componenteDireccion[1].longName;
 			
 			}
 			else
 			{
-				alturaInicio=indefinida;
-				alturaFin=indefinida;
-				calle=componenteDireccion[0].longName;
+		
+				if ( NumberUtils.isNumber(componenteDireccion[0].longName))
+				{	
+				altura=Integer.parseInt(componenteDireccion[0].longName);
+				calle=componenteDireccion[1].longName;
+				}
+				else
+				{
+					
+					calle=componenteDireccion[0].longName;
+				}
 																
 			}
 			
 	
-			Punto punto= new Punto(new Date(), calle, Integer.parseInt(alturaInicio), Integer.parseInt(alturaInicio),Integer.parseInt(alturaFin), coordenada.lat, coordenada.lng);
+			Punto punto= new Punto(new Date(), calle, altura, alturaInicio,alturaFin, coordenada.lat, coordenada.lng);
 			return punto;
 	
 		 
