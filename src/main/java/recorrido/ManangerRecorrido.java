@@ -14,7 +14,8 @@ import parser.Parser;
 public class ManangerRecorrido 
 {
 	public static final String RECORRIDO_505_A = "D:\\Google Drive\\Proyecto AsisTAn\\Colectivos\\";
-	private static final String NOMBRE_RECORRIDO_505_A = "Recorrido505-AExportJson";
+	public static final String NOMBRE_RECORRIDO_505_A = "Recorrido505-AExportJson";
+	public static final String NOMBRE_RECORRIDO_505_A_PARADAS = "Recorrido505-AParadas";
 	Recorrido recorridoMarronA;
 	ArrayList<Colectivo> colectivosMarron;
 	 ApiGoogle apiGoogle;

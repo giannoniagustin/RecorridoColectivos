@@ -46,12 +46,12 @@ public class recorridoGoogle extends HttpServlet {
 	 
 	   ManangerArchivos manangerArchivos= new ManangerArchivos();
 	   ManangerRecorrido mRec= new ManangerRecorrido(new ApiGoogle(),manangerArchivos,new Parser() );
-	   
+	/*   
 	   Archivo archivo= new Archivo(ManangerRecorrido.RECORRIDO_505_A, "new1", manangerArchivos);
 	   archivo.abrirArchivoLectura();
-	   mRec.procesarColectivos(archivo.proximaLinea(), "505");
+	   mRec.procesarColectivos(archivo.proximaLinea(), "505");*/
 
-	//   mRec.cargarRecorridos();
+	   mRec.cargarRecorridos();
 	      
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

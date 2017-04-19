@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.google.gson.Gson;
+import com.vividsolutions.jts.geom.Coordinate;
 
+import grafo.Punto;
 import recorrido.Colectivo;
 
 public class Parser {
@@ -50,6 +52,15 @@ public class Parser {
 		
 		
 		return coles;
+	}
+	public Coordinate[] coordenadasRuta(ArrayList<Punto> rutaObtenida) {
+		
+		 Coordinate[] coordinates = new Coordinate[rutaObtenida.size()];
+		 for (int j = 0; j < rutaObtenida.size(); j++) {
+			 coordinates[j] = new Coordinate(rutaObtenida.get(j).getLatitude(),rutaObtenida.get(j).getLongitude());
+			 System.out.println(coordinates[j]);
+		 }
+		return coordinates;
 	}
 
 }

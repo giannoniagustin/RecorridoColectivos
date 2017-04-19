@@ -6,20 +6,24 @@ import grafo.Grafo;
 
 public class Recorrido 
 {
-	public  static final Double  INVALIDO=null;
+
 	int paradas;
 	private Double[][] distanciaParadas;
 	private Double[][] tiempoParadas;
 	private Grafo grafo;
+	private ArrayList<Colectivo> colectivos;
 
 	public Recorrido(Grafo grafo, ArrayList<Colectivo> colectivos)
 	{
+		grafo.generarRecorrido();
+		grafo.guardarGrafo();
+		cargarMatrizDistancia();
 		this.paradas=grafo.getVertices().size()-1;
 		distanciaParadas= new Double[paradas][paradas];
 		tiempoParadas= new Double[paradas][paradas];
 		this.grafo=grafo;
+	
 		
-		cargarMatrizDistancia();
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -32,8 +36,7 @@ public class Recorrido
 		{
 			for(int i=0; i < paradas;i++)
 			{
-				//if (distanciaParadas[i][j] != INVALIDO )
-				{
+				
 					if ( i == j)
 					{
 						distanciaParadas[i][j]=grafo.getAristas().get(i).getTrayecto().getLargo();;
@@ -48,13 +51,8 @@ public class Recorrido
 							
 						}
 						
-						
 					}
 					
-						
-					
-				}
-				
 			}
 			
 		}
@@ -93,5 +91,6 @@ public class Recorrido
 		return distanciaParadas[tramoInicio][tramoFin];
 		
 	}
+
 
 }

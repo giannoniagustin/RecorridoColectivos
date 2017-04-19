@@ -4,16 +4,12 @@ import java.util.Date;
 
 import com.google.maps.model.LatLng;
 
+import filtros.Filtro;
 import google.ApiGoogle;
 
-public class Punto {
+public class Punto extends ElementoUbicacion {
 
 
-	protected Date fechaCreacion;
-    protected String calle;
-    protected Integer altura;
-    protected Integer alturaInicio;
-    protected Integer alturaFin;
     protected LatLng coordenada;
     
     
@@ -41,7 +37,7 @@ public class Punto {
 	public void setAltura(Integer altura) {
 		this.altura = altura;
 	}
-	public Punto(Date fechaCreacion,Double latitude, Double longitude)
+	public Punto(Date fechaCreacion,Double latitude, Double longitude)// 
 	{
 		ApiGoogle apiGoogle= new ApiGoogle();
 		this.fechaCreacion=fechaCreacion;
@@ -113,6 +109,11 @@ public class Punto {
 		return "calle=" + calle + ", altura=" + altura + ", alturaInicio="
 				+ alturaInicio + ", alturaFin=" + alturaFin 
 				+ ", coordenada=" + coordenada;
+	}
+	@Override
+	public boolean cumple(Filtro f) {
+		// TODO Auto-generated method stub
+		return f.cumple(this);
 	}
 	
 

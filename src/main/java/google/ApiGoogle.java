@@ -148,7 +148,7 @@ public class ApiGoogle {
 			for (int i=0;i < puntos.size();i++)
 			{
 				
-				camino.add(new Punto(new Date(), null, -1, -1, -1, puntos.get(i).lat, puntos.get(i).lng));
+				camino.add(new Punto(new Date(), puntos.get(i).lat, puntos.get(i).lng));
 			}
 			//Tiempo en hacer ruta
 			DirectionsLeg[] legs = rutas[0].legs;
