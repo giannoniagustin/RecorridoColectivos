@@ -6,6 +6,22 @@ import grafo.Punto;
 
 public class Colectivo extends Punto{
 
+	public String getIdCole() {
+		return idCole;
+	}
+
+	public void setIdCole(String idCole) {
+		this.idCole = idCole;
+	}
+
+	public Integer getNroColectivo() {
+		return nroColectivo;
+	}
+
+	public void setNroColectivo(Integer nroColectivo) {
+		this.nroColectivo = nroColectivo;
+	}
+
 	private String idCole;
 	private String Descripcion;
 	private String nombreIcono;

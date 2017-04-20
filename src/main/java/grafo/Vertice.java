@@ -20,6 +20,10 @@ public class Vertice {
 	public void setOrden(int orden) {
 		this.orden = orden;
 	}
+	@Override
+	public String toString() {
+		return "Vertice [punto=" + punto + ", orden=" + orden + "]";
+	}
 	
 
 }

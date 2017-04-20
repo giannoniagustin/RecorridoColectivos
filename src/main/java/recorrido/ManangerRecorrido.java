@@ -14,7 +14,8 @@ import parser.Parser;
 public class ManangerRecorrido 
 {
 	public static final String RECORRIDO_505_A = "D:\\Google Drive\\Proyecto AsisTAn\\Colectivos\\";
-	public static final String NOMBRE_RECORRIDO_505_A = "Recorrido505-AExportJson";
+	public static final String NOMBRE_RECORRIDO_505_A_JSON = "Recorrido505-AExportJson";
+	public static final String NOMBRE_RECORRIDO_505_A_PARADAS_JSON = "Recorrido505-AExportJsonParadas";
 	public static final String NOMBRE_RECORRIDO_505_A_PARADAS = "Recorrido505-AParadas";
 	Recorrido recorridoMarronA;
 	ArrayList<Colectivo> colectivosMarron;
@@ -28,21 +29,21 @@ public class ManangerRecorrido
 		this.apiGoogle = apiGoogle;
 		this.mArchivos = mArchivos;
 		this.parser = parser;
+
 	}
 
 	public void cargarRecorridos()
 	{
-		
-		recorridoMarronA= new Recorrido(new Grafo(apiGoogle, mArchivos,RECORRIDO_505_A,NOMBRE_RECORRIDO_505_A), colectivosMarron);
-		
-		
+		recorridoMarronA= new Recorrido(new Grafo(apiGoogle, mArchivos,RECORRIDO_505_A,NOMBRE_RECORRIDO_505_A_PARADAS_JSON), colectivosMarron);	
 	}
 	
 	public void procesarColectivos(String contenido, String linea)
 	{
-		 try {
-	            ArrayList<Colectivo> coles =  new ArrayList<Colectivo>();
-	            colectivosMarron=parser.parsearColectivos(contenido, linea);
+		 try 
+		 {
+	           colectivosMarron=this.parser.parsearColectivos(contenido, linea);
+	            recorridoMarronA.setColectivos(colectivosMarron);
+	            recorridoMarronA.trayectoColectivo();
 
 	        } catch (Exception e) {
 	           e.toString();

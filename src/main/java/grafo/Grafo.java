@@ -17,6 +17,7 @@ import archivo.ManangerArchivos;
 import google.ApiGoogle;
 import recorrido.ManangerRecorrido;
 
+
 public class Grafo {
 	private  DirectedGraph<Vertice, Arista> g;
 	ArrayList<Vertice> vertices;
@@ -193,6 +194,30 @@ public class Grafo {
 		
 		
 		
+	}
+
+	public Arista getTrayecto(Punto p)
+	{
+		boolean encontro=false;
+		for (int i=0; i < aristas.size() && !encontro;i++)
+		{
+			if (aristas.get(i).getTrayecto().pertenece(p))
+			{
+				encontro=true;
+				return aristas.get(i);
+				
+			}
+			
+			
+		}
+	
+		return null;
+	}
+
+	public Vertice proximoVertice(Arista arista) {
+		// TODO Auto-generated method stub
+		Vertice destino = g.getEdgeTarget(arista);
+		return destino;
 	}
 	
 

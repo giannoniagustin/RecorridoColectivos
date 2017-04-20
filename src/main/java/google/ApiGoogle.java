@@ -5,6 +5,7 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -90,10 +91,9 @@ public class ApiGoogle {
 		 
 		 try 
 		 {
-			Gson gson =new Gson(); 
+			
 			GeocodingResult[] results;
 			results = GeocodingApi.reverseGeocode(context, coordenada).language(idioma).await();
-	 //      String a = gson.toJson(results);
 	       
 			componenteDireccion= 	results[0].addressComponents;
 			if (componenteDireccion[0].longName.contains("-"))
@@ -144,7 +144,7 @@ public class ApiGoogle {
 			DirectionsRoute[] rutas = caminoResponse.routes;
 			EncodedPolyline rutasCodificada = rutas[0].overviewPolyline;
 			List<LatLng> puntos = rutasCodificada.decodePath();
-			Vector<Punto> camino=new Vector<>();
+			ArrayList<Punto> camino=new ArrayList<>();
 			for (int i=0;i < puntos.size();i++)
 			{
 				

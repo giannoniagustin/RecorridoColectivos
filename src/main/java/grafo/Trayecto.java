@@ -35,6 +35,13 @@ public class Trayecto extends ElementoUbicacion {
 	Parser parser;
 	
 	
+	
+	public Trayecto() {
+		super();
+		this.parser= new Parser();
+	}
+
+
 	public ArrayList<Punto> getPuntos() {
 		return puntos;
 	}
@@ -90,7 +97,7 @@ public class Trayecto extends ElementoUbicacion {
 
 	}
 
-	public boolean peretenece (Punto punto)
+/*	public boolean peretenece (Punto punto)
 	{
 		Punto pComienzo= puntos.get(0);
 		Punto pFin = puntos.get(puntos.size()-1);
@@ -116,14 +123,9 @@ public class Trayecto extends ElementoUbicacion {
 
 		
 		
-	}
+	}*/
 
-	@Override
-	public String toString() {
-		
-		return "";
-		
-	}
+
 
 
 	@Override
@@ -131,53 +133,24 @@ public class Trayecto extends ElementoUbicacion {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public String toString() {
+		return "Trayecto [puntos=" + puntos + ", largo=" + largo + ", duracion=" + duracion + "]";
+	}
+
+
 	public boolean pertenece(Punto p)
 	{
-	/*FiltroCalleIgual fCalleIgual= new FiltroCalleIgual();
-	fCalleIgual.setPunto(p);
-					
-	FiltroAlturaIgual fAlturaIgual= new FiltroAlturaIgual();
-	fAlturaIgual.setPunto(p);
-					
-	FiltroAlturaMayor fAlturaMayor= new FiltroAlturaMayor();
-	fAlturaMayor.setPunto(p);
-					
-	FiltroAlturaMenor fAlturaMenor = new FiltroAlturaMenor();
-	fAlturaMenor.setPunto(p);
-					
-	FiltroAnd fAlturaEntre= new FiltroAnd(fAlturaMenor, fAlturaMayor);
-	FiltroOr  fOr = new FiltroOr(fAlturaEntre, fAlturaIgual);
-					
-	FiltroAnd filtroPrincipal = new FiltroAnd(fCalleIgual,fOr);					
-	
-	boolean igual=false;
-	for (int i =0; i < this.puntos.size() && !igual;i++)
-	{
-		igual=puntos.get(i).cumple(filtroPrincipal);
-		
-	}
-			
-		
-		return igual;*/
-		
 		ZonaPuntoCircular zonaPunto;
 		zonaPunto = new ZonaPuntoCircular(p);
-		Coordinate[] coordenadasRuta = parser.coordenadasRuta(puntos);
-		
-		
+		Coordinate[] coordenadasRuta = parser.coordenadasRuta(puntos);			
 		Geometry g;
 		GeometryFactory factory = new GeometryFactory();
 		LineString caminoNuevo = null;
 		caminoNuevo = factory.createLineString(coordenadasRuta);
-
-		{
-			g = zonaPunto.cortaRuta(caminoNuevo);	
-			System.out.println("coordenadas intersecc: "+g + "num p "+g.getNumPoints());
-			if (g.getNumPoints() > 0){ 
-				return true;
-				}
-			}
-		return false;
+		g = zonaPunto.cortaRuta(caminoNuevo);	
+		return (g.getNumPoints() > 0);
+			
 	}
 
 }

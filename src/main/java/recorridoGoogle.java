@@ -15,7 +15,9 @@ import com.google.maps.model.LatLng;
 import archivo.Archivo;
 import archivo.ManangerArchivos;
 import google.ApiGoogle;
+import grafo.CostoTraslado;
 import grafo.Grafo;
+import grafo.Matriz;
 import grafo.Punto;
 import grafo.Trayecto;
 import parser.Parser;
@@ -43,6 +45,7 @@ public class recorridoGoogle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+
 	 
 	   ManangerArchivos manangerArchivos= new ManangerArchivos();
 	   ManangerRecorrido mRec= new ManangerRecorrido(new ApiGoogle(),manangerArchivos,new Parser() );
@@ -52,6 +55,9 @@ public class recorridoGoogle extends HttpServlet {
 	   mRec.procesarColectivos(archivo.proximaLinea(), "505");*/
 
 	   mRec.cargarRecorridos();
+	   Archivo archivo= new Archivo(ManangerRecorrido.RECORRIDO_505_A, "new1", manangerArchivos);
+	   archivo.abrirArchivoLectura();
+	   mRec.procesarColectivos(archivo.proximaLinea(), "505");
 	      
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
